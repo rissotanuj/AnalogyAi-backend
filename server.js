@@ -13,6 +13,13 @@ require('dotenv').config(); // Load environment variables from .env
 
 // Middleware
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+
 app.use(cors());
 
 // Connect to MongoDB using Mongoose (replace with your MongoDB URL)
