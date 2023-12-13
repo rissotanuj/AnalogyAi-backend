@@ -13,6 +13,17 @@ require('dotenv').config(); // Load environment variables from .env
 
 // Middleware
 app.use(bodyParser.json());
+
+// Example middleware to enable CORS in Express
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://analogyai.netlify.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+
 app.use(
   cors({
     origin: "*",
