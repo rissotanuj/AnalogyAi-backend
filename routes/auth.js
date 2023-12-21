@@ -11,15 +11,16 @@ const secretKey = process.env.SECRET_KEY;
 // const openaiApiKey = process.env.OPENAI_API_KEY;
 
 
+
 // Register a new user
 router.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    // Check if the username already exists
-    const existingUser = await User.findOne({ username });
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "Username already exists" });
+      return res.status(400).json({ message: "Email already exists" });
     }
 
     // Hash the password
@@ -27,7 +28,7 @@ router.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     // Create a new user
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ email, password: hashedPassword });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully" });
