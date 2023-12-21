@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  username: { type: String },
+  email: { type: String, unique: true }, // Changing the field to 'email' and adding uniqueness constraint
   password: { type: String },
 });
 
